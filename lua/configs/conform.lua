@@ -2,8 +2,9 @@ local options = {
   formatters_by_ft = {
     lua = { "stylua" },
     cpp = { "clang_format" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
+    cmake = { "gersemi" },
+    python = { "black" },
+    bash = { "beautysh" },
   },
 
   -- format_on_save = {
