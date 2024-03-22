@@ -29,19 +29,31 @@ wk.register({
     l = { lazygit_toggle, "LazyGit" },
     v = {
       function()
-        require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm", size = 0.3 }
+        require("nvchad.term").toggle {
+          pos = "vsp",
+          id = "vtoggleTerm",
+          cmd = "$(which fish) || /bin/bash",
+        }
       end,
       "Vertical",
     }, -- vertical
     h = {
       function()
-        require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm", size = 0.3 }
+        require("nvchad.term").toggle {
+          pos = "sp",
+          id = "htoggleTerm",
+          cmd = "$(which fish) || /bin/bash",
+        }
       end,
       "Horizontal",
     }, -- horizontal
     f = {
       function()
-        require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+        require("nvchad.term").toggle {
+          pos = "float",
+          id = "floatTerm",
+          cmd = "$(which fish) || /bin/bash",
+        }
       end,
       "Float",
     }, -- float
