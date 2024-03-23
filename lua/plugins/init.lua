@@ -6,25 +6,36 @@ return {
       require "configs.conform"
     end,
   },
-
-
   {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "clangd",
-        "neocmakelsp",
-        "gersemi",
-        "jedi-language-server",
-        "clang-format",
-        "remark-cli",
-        "remark-language-server",
-        "beautysh",
-        "black",
-        "jq-lsp",
-        "jq"
+        -- lua
+        "lua-language-server", -- lsp
+        "stylua", -- formatter
+        -- cmake
+        "neocmakelsp", -- lsp
+        "gersemi", -- formatter
+        -- c++/cuda/c
+        "clangd", -- lsp
+        "clang-format", -- formatter
+        -- markdown
+        "marksman", -- markdown
+        -- bash
+        "bash-language-server", -- lsp
+        "beautysh", -- formatter
+        -- json
+        "jq-lsp", -- lsp
+        -- python
+        "ruff", -- formatter
+        "ruff-lsp", -- lsp
+        -- yaml
+        "yamlls", -- lsp
+        -- docker
+        "dockercompose-language-server", -- lsp
+        "dockerfile-language-server", --lsp
+        -- json/markdown/yaml
+        "prettierd", -- formatter
       },
     },
   },
@@ -45,6 +56,9 @@ return {
         "cpp",
         "cuda",
         "c",
+        "cmake",
+        "yaml",
+        "docker",
         "python",
         "markdown",
         "bash",

@@ -5,6 +5,10 @@ local options = {
     cmake = { "gersemi" },
     python = { "black" },
     bash = { "beautysh" },
+    markdown = { "prettierd" },
+    json = { "prettierd" },
+    yaml = { "prettierd" },
+
   },
 
   -- format_on_save = {

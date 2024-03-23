@@ -55,10 +55,10 @@ local custom_on_attach = function(client, bufnr)
 end
 
 local servers = {
-  "jq-lsp",
-  "neocmakelsp",
-  "jedi-language-server",
-  "remark-language-server"
+  "jqls",
+  "neocmake",
+  "jedi_language_server",
+  "marksman"
 }
 
 for _, lsp in ipairs(servers) do
