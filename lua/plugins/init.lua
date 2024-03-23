@@ -58,7 +58,6 @@ return {
         "c",
         "cmake",
         "yaml",
-        "docker",
         "python",
         "markdown",
         "bash",

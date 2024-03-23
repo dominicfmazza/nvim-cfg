@@ -16,7 +16,7 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.termguicolors = true
 opt.cursorline = true
-opt.relativenumber = true
+opt.relativenumber = false 
 opt.number = true
 opt.signcolumn = "yes:2"
 
