@@ -23,3 +23,8 @@ wk.register({
   ["<S-Tab>"] = { "<gv", "Unindent line" },
   ["<Tab>"] = { ">gv", "Indent line" }
 }, { mode = "v" })
+
+wk.register({
+  ["|"] = { "<cmd>vsplit<cr>", "Vertical Split" },
+  ["\\"] = { "<cmd>split<cr>", "Horizontal Split" },
+}, { prefix = "<leader>" })
