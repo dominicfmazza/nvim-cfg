@@ -15,5 +15,9 @@ M.ui = {
       border = "single",
     },
   },
+  cmp = {
+    style = "atom_colored",
+  },
+  lsp_semantic_tokens = true,
 }
 return M
