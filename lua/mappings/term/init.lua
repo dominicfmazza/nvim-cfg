@@ -66,3 +66,5 @@ map("t", "<ESC>", function()
   local win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_close(win, true)
 end, { desc = "Terminal Close term in terminal mode" })
+
+require("lua.mappings.term.build")

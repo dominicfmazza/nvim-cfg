@@ -9,7 +9,7 @@ require("lua.mappings.gitsigns")
 require("lua.mappings.comment")
 require("lua.mappings.telescope")
 require("lua.mappings.buffer")
-require("lua.mappings.term")
+require("lua.mappings.term.init")
 
 local wk = require("which-key")
 
