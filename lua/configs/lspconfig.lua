@@ -92,6 +92,7 @@ end
 
 local servers = {
   "jqls",
+  "rust-analyzer",
   "neocmake",
   "marksman",
   "docker_compose_language_service",
