@@ -8,6 +8,35 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 local wk = require "which-key"
+local ensure_installed = {
+  -- lua
+  "lua-language-server", -- lsp
+  "stylua", -- formatter
+  -- cmake
+  "neocmakelsp", -- lsp
+  "gersemi", -- formatter
+  -- c++/cuda/c
+  "clangd", -- lsp
+  "clang-format", -- formatter
+  -- markdown
+  "marksman", -- markdown
+  -- bash
+  "bash-language-server", -- lsp
+  "beautysh", -- formatter
+  -- json
+  "jq-lsp", -- lsp
+  -- python
+  "jedi-language-server",
+  "ruff", -- formatter
+  "ruff-lsp", -- lsp
+  -- yaml
+  "yaml-language-server", -- lsp
+  -- docker
+  "dockerfile-language-server", --lsp
+  -- json/markdown/yaml
+  "prettierd", -- formatter
+  "biome",
+}
 
 wk.register({
   l = {
@@ -26,12 +55,19 @@ local custom_on_attach = function(client, bufnr)
   wk.register({
     l = {
       D = { vim.lsp.buf.declaration, "LSP: Goto declaration" },
-      d = { vim.lsp.buf.definition, "LSP: Goto implementation" },
-      i = { vim.lsp.buf.implementation, "LSP: Goto declaration" },
-      r = { vim.lsp.buf.rename, "LSP: Rename" },
-      R = { vim.lsp.buf.references, "LSP: References" },
+      d = { require("telescope.builtin").lsp_implementations, "LSP: Goto implementation" },
+      i = { require("telescope.builtin").lsp_definitions, "LSP: Goto declaration" },
+      r = {
+        function()
+          require "nvchad.lsp.renamer"()
+        end,
+        "LSP: Rename",
+      },
+      R = { require("telescope.builtin").lsp_references, "LSP: References" },
       a = { vim.lsp.buf.code_action, "LSP: Code Action" },
-      t = { vim.lsp.buf.type_definition, "LSP: Type Definition" },
+      S = { require("telescope.builtin").lsp_workspace_symbols, "LSP: Workspace Symbols" },
+      s = { require("telescope.builtin").lsp_document_symbols, "LSP: Document Symbols" },
+      t = { require("telescope.builtin").lsp_type_definitions, "LSP: Type Definition" },
       f = {
         function()
           require("conform").format { lsp_fallback = true }
@@ -57,8 +93,13 @@ end
 local servers = {
   "jqls",
   "neocmake",
+  "marksman",
+  "docker_compose_language_service",
+  "dockerls",
   "jedi_language_server",
-  "marksman"
+  "bashls",
+  "ruff_lsp",
+  "jsonls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -109,3 +150,45 @@ require("lspconfig").clangd.setup {
     ".git"
   ),
 }
+
+require("lspconfig").yamlls.setup {
+  on_attach = custom_on_attach,
+  capabilities = capabilities,
+  on_init = on_init,
+
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = ".gitlab-ci.yml",
+      },
+      customTags = {
+        "!reference sequence",
+      },
+    },
+  },
+}
+
+-- If you are using mason.nvim, you can get the ts_plugin_path like this
+local mason_registry = require "mason-registry"
+local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+  .. "/node_modules/@vue/language-server"
+
+lspconfig.tsserver.setup {
+  on_attach = custom_on_attach,
+  capabilities = capabilities,
+  on_init = on_init,
+
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = vue_language_server_path,
+        languages = { "vue" },
+      },
+    },
+  },
+  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+}
+
+-- No need to set `hybridMode` to `true` as it's the default value
+lspconfig.volar.setup {}

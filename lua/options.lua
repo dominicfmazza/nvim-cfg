@@ -1,6 +1,5 @@
 require "nvchad.options"
 
-
 local opt = vim.opt
 
 -- global options --
@@ -16,7 +15,26 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.termguicolors = true
 opt.cursorline = true
-opt.relativenumber = false 
+opt.relativenumber = false
 opt.number = true
 opt.signcolumn = "yes:2"
 
+function my_paste(reg)
+  return function(lines)
+    local content = vim.fn.getreg '"'
+    return vim.split(content, "\n")
+  end
+end
+
+opt.clipboard:append "unnamedplus"
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy "+",
+    ["*"] = require("vim.ui.clipboard.osc52").copy "*",
+  },
+  paste = {
+    ["+"] = my_paste "+",
+    ["*"] = my_paste "*",
+  },
+}

@@ -38,3 +38,5 @@ vim.schedule(function()
   require "mappings"
 end)
 
+vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE", default = false })
+vim.api.nvim_set_hl(0, "WinBarNC", { fg = "NONE", default = false })

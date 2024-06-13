@@ -27,3 +27,18 @@ wk.register({
   noremap = true,
   silent = true,
 })
+
+for i = 1, 9, 1 do
+  wk.register({
+    [string.format("b%s", i)] = {
+      function()
+        vim.api.nvim_set_current_buf(vim.t.bufs[i])
+      end,
+      string.format("Move to buffer %s", i),
+    },
+  }, {
+    prefix = "<leader>",
+    noremap = true,
+    silent = true,
+  })
+end

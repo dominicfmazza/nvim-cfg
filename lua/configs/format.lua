@@ -8,6 +8,9 @@ local options = {
     markdown = { "prettierd" },
     json = { "prettierd" },
     yaml = { "prettierd" },
+    javascript = {"prettierd"},
+    typescript = {"prettierd"},
+    vue = {"prettierd"},
   },
 }
 

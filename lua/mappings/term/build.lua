@@ -7,8 +7,9 @@ wk.register({
       function()
         require("nvchad.term").toggle {
           pos = "float",
-          id = "floatTerm",
-          cmd = "cmake --build build -j",
+          id = "cmaketerm",
+          cmd = "cmake --build build -j; exit",
+          clear_cmd = false,
         }
       end,
       "CMake: Build",
@@ -17,8 +18,8 @@ wk.register({
       function()
         require("nvchad.term").toggle {
           pos = "float",
-          id = "floatTerm",
-          cmd = "cmake -B build -S . -DCMAKE_BUILD_TYPE=Debug",
+          id = "cmaketerm",
+          cmd = "cmake -B build -S . -DCMAKE_BUILD_TYPE=Debug; exit",
         }
       end,
       "CMake: Configure Debug",
@@ -27,8 +28,8 @@ wk.register({
       function()
         require("nvchad.term").toggle {
           pos = "float",
-          id = "floatTerm",
-          cmd = "cmake -B build -S . -DCMAKE_BUILD_TYPE=Release",
+          id = "cmaketerm",
+          cmd = "cmake -B build -S . -DCMAKE_BUILD_TYPE=Release; exit",
         }
       end,
       "CMake: Configure Release",
@@ -37,8 +38,8 @@ wk.register({
       function()
         require("nvchad.term").toggle {
           pos = "float",
-          id = "floatTerm",
-          cmd = "cd docs && doxygen",
+          id = "cmaketerm",
+          cmd = "cd docs && doxygen; exit",
         }
       end,
       "Doxygen: Build Doxygen Docs",
@@ -47,8 +48,8 @@ wk.register({
       function()
         require("nvchad.term").toggle {
           pos = "float",
-          id = "floatTerm",
-          cmd = "rm -rf ./build/",
+          id = "cmaketerm",
+          cmd = "rm -rf ./build/; exit",
         }
       end,
       "CMake: Clean ./build/",

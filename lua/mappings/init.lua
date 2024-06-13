@@ -4,14 +4,15 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 
-require("lua.mappings.nvimtree")
-require("lua.mappings.gitsigns")
-require("lua.mappings.comment")
-require("lua.mappings.telescope")
-require("lua.mappings.buffer")
-require("lua.mappings.term.init")
+require "mappings.nvimtree"
+require "mappings.gitsigns"
+require "mappings.comment"
+require "mappings.telescope"
+require "mappings.buffer"
+require "mappings.term.init"
+require "mappings.orgmode"
 
-local wk = require("which-key")
+local wk = require "which-key"
 
 wk.register({
   w = { "<cmd>w<cr>", "Save" },
@@ -21,10 +22,10 @@ wk.register({
 
 wk.register({
   ["<S-Tab>"] = { "<gv", "Unindent line" },
-  ["<Tab>"] = { ">gv", "Indent line" }
+  ["<Tab>"] = { ">gv", "Indent line" },
 }, { mode = "v" })
 
-wk.register({
+wk.register {
   ["|"] = { "<cmd>vsplit<cr>", "Vertical Split" },
   ["\\"] = { "<cmd>split<cr>", "Horizontal Split" },
-}, { prefix = "<leader>" })
+}

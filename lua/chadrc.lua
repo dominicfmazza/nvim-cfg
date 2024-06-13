@@ -5,7 +5,7 @@ M.ui = {
   theme = "catppuccin",
   term = {
     hl = "Normal:term,WinSeparator:WinSeparator",
-    sizes = { sp = 0.4, vsp = 0.3 },
+    sizes = { sp = 0.4, vsp = 0.5},
     float = {
       relative = "editor",
       row = 0.025,
