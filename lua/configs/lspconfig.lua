@@ -8,35 +8,37 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 local wk = require "which-key"
-local ensure_installed = {
-  -- lua
-  "lua-language-server",  -- lsp
-  "stylua",               -- formatter
-  -- cmake
-  "neocmakelsp",          -- lsp
-  "gersemi",              -- formatter
-  -- c++/cuda/c
-  "clangd",               -- lsp
-  "clang-format",         -- formatter
-  -- markdown
-  "marksman",             -- markdown
-  -- bash
-  "bash-language-server", -- lsp
-  "beautysh",             -- formatter
-  -- json
-  "jq-lsp",               -- lsp
-  -- python
-  "jedi-language-server",
-  "ruff",                       -- formatter
-  "ruff-lsp",                   -- lsp
-  -- yaml
-  "yaml-language-server",       -- lsp
-  -- docker
-  "dockerfile-language-server", --lsp
-  -- json/markdown/yaml
-  "prettierd",                  -- formatter
-  "biome",
-}
+require("mason-null-ls").setup({
+  ensure_installed = {
+    -- lua
+    "lua-language-server", -- lsp
+    "stylua",             -- formatter
+    -- cmake
+    "neocmakelsp",        -- lsp
+    "gersemi",            -- formatter
+    -- c++/cuda/c
+    "clangd",             -- lsp
+    "clang-format",       -- formatter
+    -- markdown
+    "marksman",           -- markdown
+    -- bash
+    "bash-language-server", -- lsp
+    "beautysh",           -- formatter
+    -- json
+    "jq-lsp",             -- lsp
+    -- python
+    "jedi-language-server",
+    "ruff",                     -- formatter
+    "ruff-lsp",                 -- lsp
+    -- yaml
+    "yaml-language-server",     -- lsp
+    -- docker
+    "dockerfile-language-server", --lsp
+    -- json/markdown/yaml
+    "prettierd",                -- formatter
+    "biome",
+  }
+})
 wk.add({
   { "<leader>l",  group = "+lsp" },
   { "<leader>lx", vim.diagnostic.open_float, desc = "Open LSP Diagnostics" },
