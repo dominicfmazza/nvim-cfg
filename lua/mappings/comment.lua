@@ -1,23 +1,27 @@
 local wk = require("which-key")
 
-wk.register({
-  ["/"] = {
+wk.add({
+  {
+    "<leader>/",
     function()
       require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
     end,
-    "Toggle linewise comment"
+    desc = "Toggle linewise comment"
   },
-}, {
-  prefix = "<leader>",
-  mode = "n"
+  {
+    mode = "n"
+  }
 })
 
-wk.register({
-  ["/"] = {
+
+wk.add({
+  {
+    "<leader>/",
     "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-    "Toggle block comment"
+    desc = "Toggle block comment"
   },
-}, {
-  prefix = "<leader>",
-  mode = "v"
+  {
+    prefix = "<leader>",
+    mode = "v"
+  }
 })
