@@ -1,41 +1,42 @@
 local wk = require "which-key"
 
-wk.register({
-  t = {
-    name = "+terminal",
-    v = {
-      function()
-        require("nvchad.term").toggle {
-          pos = "vsp",
-          id = "vtoggleTerm",
-          float_opts = {
-            width = 0.8,
-            height = 0.8,
-          },
-        }
-      end,
-      "Vertical",
-    }, -- vertical
-    h = {
-      function()
-        require("nvchad.term").toggle {
-          pos = "sp",
-          id = "htoggleTerm",
-        }
-      end,
-      "Horizontal",
-    }, -- horizontal
-    f = {
-      function()
-        require("nvchad.term").toggle {
-          pos = "float",
-          id = "floatTerm",
-        }
-      end,
-      "Float",
-    }, -- float
-  },
-}, { noremap = true, silent = true, prefix = "<leader>" })
+wk.add({
+  { "<leader>t",    group = "+terminal" },
+  {
+    "<leader>tv",
+    function()
+      require("nvchad.term").toggle {
+        pos = "vsp",
+        id = "vtoggleTerm",
+        float_opts = {
+          width = 0.8,
+          height = 0.8,
+        },
+      }
+    end,
+    desc = "Vertical Split Terminal",
+  }, -- vertical
+  {
+    "<leader>th",
+    function()
+      require("nvchad.term").toggle {
+        pos = "sp",
+        id = "htoggleTerm",
+      }
+    end,
+    desc = "Horizontal Split Terminal"
+  }, -- horizontal
+  {
+    "<leader>tf",
+    function()
+      require("nvchad.term").toggle {
+        pos = "float",
+        id = "floatTerm",
+      }
+    end,
+    desc = "Float",
+  }, { noremap = true, silent = true } -- float
+})
 
 local map = vim.keymap.set
 
