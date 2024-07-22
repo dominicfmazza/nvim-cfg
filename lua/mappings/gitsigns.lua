@@ -81,7 +81,7 @@ wk.add(
 )
 
 
-wk.register({
+wk.add({
   { "]g", function() require("gitsigns").next_hunk() end, desc = "Next Hunk" },
   { "[g", function() require("gitsigns").prev_hunk() end, desc = "Previous Hunk" },
 })

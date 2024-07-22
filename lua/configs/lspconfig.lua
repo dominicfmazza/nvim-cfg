@@ -10,41 +10,38 @@ local lspconfig = require "lspconfig"
 local wk = require "which-key"
 local ensure_installed = {
   -- lua
-  "lua-language-server", -- lsp
-  "stylua", -- formatter
+  "lua-language-server",  -- lsp
+  "stylua",               -- formatter
   -- cmake
-  "neocmakelsp", -- lsp
-  "gersemi", -- formatter
+  "neocmakelsp",          -- lsp
+  "gersemi",              -- formatter
   -- c++/cuda/c
-  "clangd", -- lsp
-  "clang-format", -- formatter
+  "clangd",               -- lsp
+  "clang-format",         -- formatter
   -- markdown
-  "marksman", -- markdown
+  "marksman",             -- markdown
   -- bash
   "bash-language-server", -- lsp
-  "beautysh", -- formatter
+  "beautysh",             -- formatter
   -- json
-  "jq-lsp", -- lsp
+  "jq-lsp",               -- lsp
   -- python
   "jedi-language-server",
-  "ruff", -- formatter
-  "ruff-lsp", -- lsp
+  "ruff",                       -- formatter
+  "ruff-lsp",                   -- lsp
   -- yaml
-  "yaml-language-server", -- lsp
+  "yaml-language-server",       -- lsp
   -- docker
   "dockerfile-language-server", --lsp
   -- json/markdown/yaml
-  "prettierd", -- formatter
+  "prettierd",                  -- formatter
   "biome",
 }
-
-wk.register({
-  l = {
-    name = "+lsp",
-    d = { vim.diagnostic.open_float, "LSP: Open Diagnostics Float" },
-    q = { vim.diagnostic.setloclist, "LSP: Set Loclist" },
-  },
-}, { prefix = "<leader>" })
+wk.add({
+  { "<leader>l",  group = "+lsp" },
+  { "<leader>lx", vim.diagnostic.open_float, desc = "Open LSP Diagnostics" },
+  { "<leader>lq", vim.diagnostic.open_float, desc = "Set LSP Loclist" }
+})
 
 -- export on_attach & capabilities
 local custom_on_attach = function(client, bufnr)
@@ -52,37 +49,38 @@ local custom_on_attach = function(client, bufnr)
 
   -- Buffer local mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  wk.register({
-    l = {
-      D = { vim.lsp.buf.declaration, "LSP: Goto declaration" },
-      d = { require("telescope.builtin").lsp_implementations, "LSP: Goto implementation" },
-      i = { require("telescope.builtin").lsp_definitions, "LSP: Goto declaration" },
-      r = {
-        function()
-          require "nvchad.lsp.renamer"()
-        end,
-        "LSP: Rename",
-      },
-      R = { require("telescope.builtin").lsp_references, "LSP: References" },
-      a = { vim.lsp.buf.code_action, "LSP: Code Action" },
-      S = { require("telescope.builtin").lsp_workspace_symbols, "LSP: Workspace Symbols" },
-      s = { require("telescope.builtin").lsp_document_symbols, "LSP: Document Symbols" },
-      t = { require("telescope.builtin").lsp_type_definitions, "LSP: Type Definition" },
-      f = {
-        function()
-          require("conform").format { lsp_fallback = true }
-        end,
-        "LSP: Format",
-      },
+  wk.add({
+    { "<leader>lD", vim.lsp.buf.declaration,                          desc = "Goto declaration" },
+    { "<leader>ld", require("telescope.builtin").lsp_implementations, desc = "Goto implementation" },
+    { "<leader>li", require("telescope.builtin").lsp_definitions,     desc = "Goto declaration" },
+    {
+      "<leader>lr",
+      function()
+        require "nvchad.lsp.renamer" ()
+      end,
+      desc = "Rename",
     },
-  }, {
-    prefix = "<leader>",
-    buffer = bufnr,
+    { "<leader>lR", require("telescope.builtin").lsp_references,        desc = "References" },
+    { "<leader>la", vim.lsp.buf.code_action,                            desc = "Code Action" },
+    { "<leader>lS", require("telescope.builtin").lsp_workspace_symbols, desc = "Workspace Symbols" },
+    { "<leader>ls", require("telescope.builtin").lsp_document_symbols,  desc = "Document Symbols" },
+    { "<leader>lt", require("telescope.builtin").lsp_type_definitions,  desc = "Type Definition" },
+    {
+      "<leader>lf",
+      function()
+        require("conform").format { lsp_fallback = true }
+      end,
+      desc = "Format",
+    },
+    {
+      buffer = bufnr,
+    }
   })
-  wk.register({
-    ["<C-K>"] = { vim.lsp.buf.hover, "LSP: Hover" },
-    ["<C-k>"] = { vim.lsp.buf.signature_help, "LSP: Signature Help" },
-  }, { buffer = bufnr })
+
+  wk.add({
+    { "<C-K>",       vim.lsp.buf.hover,          desc = "Hover LSP Help" },
+    { "<C-s>",       vim.lsp.buf.signature_help, desc = "LSP Signature Help" },
+    { buffer = bufnr } })
 
   -- setup signature popup
   if conf.signature and client.server_capabilities.signatureHelpProvider then
