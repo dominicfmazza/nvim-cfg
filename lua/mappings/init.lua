@@ -11,6 +11,7 @@ require "mappings.telescope"
 require "mappings.buffer"
 require "mappings.term.init"
 require "mappings.orgmode"
+require "mappings.leap"
 
 local wk = require "which-key"
 
@@ -19,6 +20,19 @@ wk.register({
   q = { "<cmd>q<cr>", "Quit" },
   c = { "<cmd>close<cr>", "Close" },
 }, { prefix = "<leader>" })
+
+wk.register {
+  ["<C-H>"] = { "<C-w>h", "Move to left split" },
+  ["<C-J>"] = { "<C-w>j", "Move to below split" },
+  ["<C-K>"] = { "<C-w>k", "Move to above split" },
+  ["<C-L>"] = { "<C-w>l", "Move to right split" },
+}
+
+
+wk.register({
+  ["J"] = { "5j", "Move to left split" },
+  ["K"] = { "5k", "Move to above split" },
+}, { noremap = true })
 
 wk.register({
   ["<S-Tab>"] = { "<gv", "Unindent line" },

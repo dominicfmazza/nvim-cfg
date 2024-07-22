@@ -1,7 +1,7 @@
 -- EXAMPLE
 -- local on_attach = require("nvchad.configs.lspconfig").on_attach
 
-local conf = require("nvconfig").ui.lsp
+local conf = require("nvconfig").lsp
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
@@ -80,7 +80,7 @@ local custom_on_attach = function(client, bufnr)
     buffer = bufnr,
   })
   wk.register({
-    K = { vim.lsp.buf.hover, "LSP: Hover" },
+    ["<C-K>"] = { vim.lsp.buf.hover, "LSP: Hover" },
     ["<C-k>"] = { vim.lsp.buf.signature_help, "LSP: Signature Help" },
   }, { buffer = bufnr })
 
@@ -92,7 +92,6 @@ end
 
 local servers = {
   "jqls",
-  "rust-analyzer",
   "neocmake",
   "marksman",
   "docker_compose_language_service",
@@ -169,27 +168,39 @@ require("lspconfig").yamlls.setup {
   },
 }
 
--- If you are using mason.nvim, you can get the ts_plugin_path like this
-local mason_registry = require "mason-registry"
-local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-  .. "/node_modules/@vue/language-server"
-
-lspconfig.tsserver.setup {
-  on_attach = custom_on_attach,
-  capabilities = capabilities,
-  on_init = on_init,
-
-  init_options = {
-    plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        location = vue_language_server_path,
-        languages = { "vue" },
-      },
-    },
-  },
-  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-}
-
--- No need to set `hybridMode` to `true` as it's the default value
-lspconfig.volar.setup {}
+-- -- If you are using mason.nvim, you can get the ts_plugin_path like this
+-- local mason_registry = require "mason-registry"
+-- local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+--   .. "/node_modules/@vue/language-server"
+--
+-- lspconfig.tsserver.setup {
+--   on_attach = custom_on_attach,
+--   capabilities = capabilities,
+--   on_init = on_init,
+--
+--   init_options = {
+--     plugins = {
+--       {
+--         name = "@vue/typescript-plugin",
+--         location = vue_language_server_path,
+--         languages = { "vue" },
+--       },
+--     },
+--   },
+--   filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+-- }
+--
+-- -- No need to set `hybridMode` to `true` as it's the default value
+-- lspconfig.volar.setup {}
+--
+-- -- lspconfig.harper_ls.setup {
+-- --   on_attach = custom_on_attach,
+-- --   on_init = on_init,
+-- --   capabilities = capabilities,
+-- --
+-- --   settings = {
+-- --     ["harper-ls"] = {
+-- --       userDictPath = vim.o.runtimepath .. "lua/configs/dict.txt"
+-- --     }
+-- --   },
+-- -- }

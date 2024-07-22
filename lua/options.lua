@@ -15,9 +15,11 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.termguicolors = true
 opt.cursorline = true
-opt.relativenumber = false
+opt.relativenumber = true
 opt.number = true
 opt.signcolumn = "yes:2"
+-- opt.cursorline = false
+opt.cursorlineopt = "number,line"
 
 function my_paste(reg)
   return function(lines)

@@ -8,7 +8,10 @@ wk.register({
         require("nvchad.term").toggle {
           pos = "vsp",
           id = "vtoggleTerm",
-          cmd = "$(which fish) || /bin/bash",
+          float_opts = {
+            width = 0.8,
+            height = 0.8,
+          },
         }
       end,
       "Vertical",
@@ -18,7 +21,6 @@ wk.register({
         require("nvchad.term").toggle {
           pos = "sp",
           id = "htoggleTerm",
-          cmd = "$(which fish) || /bin/bash",
         }
       end,
       "Horizontal",
@@ -28,7 +30,6 @@ wk.register({
         require("nvchad.term").toggle {
           pos = "float",
           id = "floatTerm",
-          cmd = "$(which fish) || /bin/bash",
         }
       end,
       "Float",
