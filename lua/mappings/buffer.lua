@@ -1,43 +1,42 @@
 local wk = require "which-key"
-
-wk.register({
-  b = {
-    name = "+buffer",
-    [","] = {
-      function()
-        require("nvchad.tabufline").prev()
-      end,
-      "Move Previous Buffer",
-    },
-    ["."] = {
-      function()
-        require("nvchad.tabufline").next()
-      end,
-      "Move Next Buffer",
-    },
-    ["c"] = {
-      function()
-        require("nvchad.tabufline").close_buffer()
-      end,
-      "Close Buffer",
-    },
+wk.add({
+  { "<leader>b",    group = "+buffer" },
+  {
+    "<leader>b,",
+    function()
+      require("nvchad.tabufline").prev()
+    end,
+    desc = "Move Previous Buffer",
   },
-}, {
-  prefix = "<leader>",
-  noremap = true,
-  silent = true,
+  {
+    "<leader>b.",
+    function()
+      require("nvchad.tabufline").next()
+    end,
+    desc = "Move Next Buffer",
+  },
+  {
+    "<leader>bc",
+    function()
+      require("nvchad.tabufline").close_buffer()
+    end,
+    desc = "Close Buffer",
+  }, { noremap = true, silent = true, }
 })
 
 for i = 1, 9, 1 do
-  wk.register({
-    [string.format("b%s", i)] = {
+  wk.add({
+    {
+      string.format("<leader>b%s", i),
       function()
-        vim.api.nvim_set_current_buf(vim.t.bufs[i])
+        if vim.api.nvim_buf_is_valid(i)
+        then
+          vim.api.nvim_set_current_buf(vim.t.bufs[i])
+        end
       end,
-      string.format("Move to buffer %s", i),
+      desc = string.format("Move to buffer %s", i),
     },
   }, {
-    prefix = "<leader>",
     noremap = true,
     silent = true,
   })
