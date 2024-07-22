@@ -14,32 +14,39 @@ require "mappings.orgmode"
 require "mappings.leap"
 
 local wk = require "which-key"
+wk.add(
+  {
+    { "<leader>c", "<cmd>close<cr>", desc = "Close" },
+    { "<leader>q", "<cmd>q<cr>",     desc = "Quit" },
+    { "<leader>w", "<cmd>w<cr>",     desc = "Save" },
+  }
+)
 
-wk.register({
-  w = { "<cmd>w<cr>", "Save" },
-  q = { "<cmd>q<cr>", "Quit" },
-  c = { "<cmd>close<cr>", "Close" },
-}, { prefix = "<leader>" })
+wk.add(
+  {
+    { "<C-H>", "<C-w>h", desc = "Move to left split" },
+    { "<C-J>", "<C-w>j", desc = "Move to below split" },
+    { "<C-K>", "<C-w>k", desc = "Move to above split" },
+    { "<C-L>", "<C-w>l", desc = "Move to right split" },
+  }
+)
 
-wk.register {
-  ["<C-H>"] = { "<C-w>h", "Move to left split" },
-  ["<C-J>"] = { "<C-w>j", "Move to below split" },
-  ["<C-K>"] = { "<C-w>k", "Move to above split" },
-  ["<C-L>"] = { "<C-w>l", "Move to right split" },
-}
+wk.add(
+  {
+    { "J", "5j", desc = "Move to left split",  remap = false },
+    { "K", "5k", desc = "Move to above split", remap = false },
+  }
+)
 
-
-wk.register({
-  ["J"] = { "5j", "Move to left split" },
-  ["K"] = { "5k", "Move to above split" },
-}, { noremap = true })
-
-wk.register({
-  ["<S-Tab>"] = { "<gv", "Unindent line" },
-  ["<Tab>"] = { ">gv", "Indent line" },
-}, { mode = "v" })
-
-wk.register {
-  ["|"] = { "<cmd>vsplit<cr>", "Vertical Split" },
-  ["\\"] = { "<cmd>split<cr>", "Horizontal Split" },
-}
+wk.add(
+  {
+    { "<S-Tab>", "<gv", desc = "Unindent line", mode = "v" },
+    { "<Tab>",   ">gv", desc = "Indent line",   mode = "v" },
+  }
+)
+wk.add(
+  {
+    { "\\", "<cmd>split<cr>",  desc = "Horizontal Split" },
+    { "|",  "<cmd>vsplit<cr>", desc = "Vertical Split" },
+  }
+)
